@@ -4,10 +4,10 @@ Joint XYZ remains the tifxyz default, as explicitly selected by the user. Its
 CPU/distortion tradeoff is recorded in BENCHMARKS.md. The codec stays synchronous;
 callers own scheduling. No internal threads, thread controls or parallel API.
 
-The current candidate is **1.0.0-rc.1**, using **container version 4**. Preparing
-candidate sources does not declare a tested or published 1.0 release.
+The release sources identify **1.0.0**, using **container version 4**.
+Publication remains pending the final artifact gate below.
 
-## Compatibility policy to freeze for 1.0
+## Compatibility policy for 1.x
 
 - Version-4 files written by 1.x must remain readable by conforming 1.x decoders.
   Encoder output bytes and reconstructed float bits may change, but the format,
@@ -32,12 +32,12 @@ candidate sources does not declare a tested or published 1.0 release.
 - [x] Versioned library/header/CLI identity and CMake installation/export targets.
 - [x] Separate installed C and C++ consumer tests pass locally for static library.
 - [x] Static/shared installed packages pass after moving the install prefix (CMake and pkg-config).
-- [ ] Permanent v1–v4 fixtures pass on the full compiler/architecture matrix.
-- [ ] CI exchanges newly encoded containers across machines and math policies.
+- [x] Permanent v1–v4 fixtures pass on the full compiler/architecture matrix.
+- [x] CI exchanges newly encoded containers across machines and math policies.
 - [ ] Sustained container/block fuzzing and allocation/I/O failure injection pass.
 - [x] Seven real inputs from five surfaces pass source-reference checks; generic image coverage expanded.
 - [x] Candidate source archive builds/tests from a clean extraction (26 tests, including cache and nonfinite cases).
-- [ ] Final numerical/API/format review has no unresolved correctness findings.
+- [x] Final numerical/API/format review has no unresolved confirmed correctness findings.
 - [ ] Candidate committed, remote CI green, renderer pinned to tested revision.
 - [ ] Final 1.0 version/changelog/tag/release artifacts published after gates pass.
 
@@ -80,3 +80,10 @@ first-sample NaN regression is fixed by disabling finite-only assumptions while
 retaining other fast-math optimizations. All 26 local tests and 24 sanitizer
 tests pass, including strict-oracle nonfinite tests. Renderer cache/UI/stream
 tests and a headless real-file smoke pass with the updated codec snapshot.
+
+Candidate commit `e20b451f4638d0abac46b2baea2081b7fa48ee3e` passed all
+13 remote jobs: six compiler/math builds, six cross-platform exchange consumers
+and Linux sanitizer/fuzz checks. Each exchange consumer decoded all 18 files
+produced by the six builds. See [candidate CI run](https://github.com/SuperOptimizer/surface-compressor/actions/runs/34559212066).
+The final version-only promotion and CLI build-policy guard are being checked
+in a fresh run before publishing.

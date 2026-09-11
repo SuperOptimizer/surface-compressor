@@ -3,9 +3,9 @@
 Independent 64×64 DCT blocks for large 2D images and parametric XYZ surfaces.
 The core C library has no TIFF dependency and reads only the requested blocks
 and their small shared entropy tables.
-Version 1.0.0-rc.1 is in preparation; the stable release is pending the
-[release gates](RELEASE.md). Container version 4 and the C API are the proposed
-1.0 compatibility baseline. Joint XYZ remains the default for tifxyz.
+Version 1.0.0 uses container version 4. The format and C API form the 1.x
+compatibility baseline; [release validation](RELEASE.md) records the checks.
+Joint XYZ is the default for tifxyz.
 
 ```sh
 cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
@@ -63,8 +63,8 @@ run `python tests/test_cli.py build/release/surface-compressor`.
 ## Partial access and memory
 
 `surfcomp.h` exposes scalar block/region reads and `sfc_read_xyz`, which returns
-all three coordinate components with one patch decode. An XYZ cache entry is
-48 KiB. `sfc_encode_xyz_block`/`sfc_decode_xyz_block` also support standalone
+all three coordinate components with one patch decode. XYZ samples occupy
+48 KiB per tile, plus 4 KiB of validity and entry bookkeeping in `sfc_cache`. `sfc_encode_xyz_block`/`sfc_decode_xyz_block` also support standalone
 self-contained packets. Use `sfc_write_xyz_block` with a grouped descriptor
 triple to append each spatial patch once, then write auxiliary channels.
 
@@ -89,13 +89,15 @@ The converter streams TIFF strips/tiles through a shared 64 MiB scratch cache.
 An individual decoded TIFF strip/tile larger than 64 MiB is rejected; retile
 such an input before conversion. XYZ extraction and validity run once per patch;
 export decodes each patch once for the three separate TIFFs.
-Region reads allocate scratch proportional to the explicitly requested region.
+Transactional `sfc_read_region` allocates scratch proportional to the requested
+region. Cache region reads stream into caller output without region-sized scratch.
 
 File creation in the C API refuses to overwrite an existing path. Cancel removes
 only a newly created output. The CLI encodes to a temporary sibling file and
 publishes it on success; export similarly publishes a completed directory and
 refuses an existing destination. Failed block and region reads leave caller
-outputs unchanged. Payloads carry CRC32 checksums, which detect corruption;
+outputs unchanged, except streaming cache region reads, which may have copied
+earlier tiles before a failure. Payloads carry CRC32 checksums, which detect corruption;
 they are not authentication. Shared tables have their own CRC32 checks.
 
 New files use container version 4; versions 1 through 3 remain readable.

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 project(surface_compressor VERSION 1.0.0 LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-set(SFC_RELEASE_VERSION "${PROJECT_VERSION}-rc.1")
+set(SFC_RELEASE_VERSION "${PROJECT_VERSION}")
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 option(BUILD_SHARED_LIBS "Build a shared codec library" OFF)
@@ -213,7 +213,7 @@ if(SFC_TESTS)
 endif()
 
 # API validation must honor NaN/Inf even when parent projects add fast-math.
-foreach(sfc_target surfcomp surfcomp_cross surfcomp_caller surfcomp_cross_caller
+foreach(sfc_target surfcomp surface-compressor surfcomp_cross surfcomp_caller surfcomp_cross_caller
                    test_entropy test_transform test_failures fuzz_decode)
   if(TARGET ${sfc_target})
     target_compile_options(${sfc_target} PRIVATE -fno-finite-math-only)

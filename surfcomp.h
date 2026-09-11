@@ -9,7 +9,7 @@ extern "C" {
 #define SFC_VERSION_MAJOR 1
 #define SFC_VERSION_MINOR 0
 #define SFC_VERSION_PATCH 0
-#define SFC_VERSION_STRING "1.0.0-rc.1"
+#define SFC_VERSION_STRING "1.0.0"
 #define SFC_FORMAT_VERSION 4u
 /* Runtime library identity, independent of the container version. */
 const char *sfc_version(void);

@@ -356,3 +356,24 @@ caller-owned threads alongside the existing 2048 scalar reads. Renderer cache
 coverage exercises both scalar and joint files; a real V4 surface also passes
 the headless renderer smoke test. ASAN/UBSAN and reference TIFF export remain
 part of the checks. Source-code snapshots are synchronized in render3d.
+
+## Release-candidate validation with finite-only assumptions disabled
+
+LLVM 22.1.8 on Apple M4, `-O3 -ffast-math -fno-finite-math-only`.
+These runs overlapped other release checks, so their wall times are not
+performance measurements. All seven source-reference checks passed. Input
+identities and source hashes are pinned in `tests/corpus/real.json`.
+
+| Input | Error limit (voxels) | Container bytes | Maximum XYZ error | RMS XYZ error |
+|---|---:|---:|---:|---:|
+| real | 1.0 | 1,600,282 | 0.988485805 | 0.392678405 |
+| real-7.91um | 0.25 | 755,567 | 0.247092868 | 0.104608957 |
+| real-29220926-2.4um | 1.0 | 2,253,949 | 0.988491594 | 0.39730415 |
+| real-29220926-7.91um | 0.25 | 1,019,084 | 0.246580097 | 0.109958329 |
+| release-corpus/20231005123336-7.91um | 0.25 | 1,381,469 | 0.246964142 | 0.109425533 |
+| release-corpus/20231007101619-7.91um | 0.25 | 2,149,965 | 0.249170745 | 0.10996526 |
+| release-corpus/20231012184424-7.91um | 0.25 | 1,532,467 | 0.24768033 | 0.108739739 |
+
+Compared with the preceding V4 measurements, the corrected compiler policy
+changes these first four file sizes by less than 0.03%. The joint XYZ choice
+and maximum-error contract are unchanged.
