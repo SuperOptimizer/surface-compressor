@@ -1,0 +1,45 @@
+{
+  "v1-exact.sfc": {
+    "sha256": "e46511b99dc4b922e207f3e1257fcf29c35dffac5ff926888c5a35836392c7a8",
+    "size": 8454,
+    "version": 1,
+    "packets": [
+      "B641:0"
+    ]
+  },
+  "v2-scalar.sfc": {
+    "sha256": "5dbcdb38b40c6c088caf459fe66bf2d4bd6b211894dabf5c23aa7e0992150456",
+    "size": 4171,
+    "version": 2,
+    "packets": [
+      "B641:1",
+      "B641:3"
+    ]
+  },
+  "v3-scalar.sfc": {
+    "sha256": "81b0feaf7c8a32e2127891c6f22190e8d0c32693eb6c0b7baaea3a6e09aaa8aa",
+    "size": 4171,
+    "version": 3,
+    "packets": [
+      "B641:1",
+      "B641:3"
+    ]
+  },
+  "v4-scalar.sfc": {
+    "sha256": "c55ca00469877fe101bf4b763ff6ff8b959aebcdcb402d1a18b9875e32189c13",
+    "size": 2305,
+    "version": 4,
+    "packets": [
+      "B641:1",
+      "B641:3"
+    ]
+  },
+  "v4-xyz.sfc": {
+    "sha256": "17ebf7a8021ecc897bbcad1d8f0f5ade598731eb496b05fa02674d6fc5014a69",
+    "size": 6941,
+    "version": 4,
+    "packets": [
+      "J641:1"
+    ]
+  }
+}

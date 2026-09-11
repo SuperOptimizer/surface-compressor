@@ -1,0 +1,11 @@
+prefix=${pcfiledir}/@SFC_PC_PREFIX@
+exec_prefix=${prefix}
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+
+Name: surfcomp
+Description: Synchronous bounded-error 64x64 image and XYZ surface compression
+Version: @SFC_RELEASE_VERSION@
+Libs: -L${libdir} -lsurfcomp
+Libs.private: -lm
+Cflags: -I${includedir}

@@ -1,0 +1,205 @@
+[
+  {
+    "id": "real",
+    "segment": "20230702185753",
+    "resolution": "2.4um",
+    "error": 1.0,
+    "grid": [
+      1820,
+      2530
+    ],
+    "url": "https://vesuvius-challenge-open-data.s3.amazonaws.com/PHercParis4/segments/20230702185753/mesh/20230702185753-on-20260411134726-2.4um.tifxyz/",
+    "files": {
+      "meta.json": {
+        "bytes": 409,
+        "sha256": "105c2716274077c3c832765ae6c0885cf679b2cbdef9f89a49875b1ee12fb84f"
+      },
+      "x.tif": {
+        "bytes": 18418534,
+        "sha256": "4b39233839ab7e818ebd7bf12a4592655c705b9ed94771dc8590bf047b98ddca"
+      },
+      "y.tif": {
+        "bytes": 18418534,
+        "sha256": "ee5c6e63339bc6698473381267dd0b04599c09897f14a2ea6d34b4e991c01d22"
+      },
+      "z.tif": {
+        "bytes": 18418534,
+        "sha256": "a889c461f669567e85e7ab55936f0e5783eed28e019cf52303378c39997e6c27"
+      }
+    }
+  },
+  {
+    "id": "real-7.91um",
+    "segment": "20230702185753",
+    "resolution": "7.91um",
+    "error": 0.25,
+    "grid": [
+      559,
+      776
+    ],
+    "url": "https://vesuvius-challenge-open-data.s3.amazonaws.com/PHercParis4/segments/20230702185753/mesh/20230702185753-on-20230205180739-7.91um.tifxyz/",
+    "files": {
+      "meta.json": {
+        "bytes": 294,
+        "sha256": "65060941042668d44e83aead82669b92a34c1ea734c250047daf3d36ea4c2e4b"
+      },
+      "x.tif": {
+        "bytes": 1148272,
+        "sha256": "4a4ce60cd6a48e248d483b13060092ea3a8e53645a9cb968b19e9da3313deccb"
+      },
+      "y.tif": {
+        "bytes": 1167794,
+        "sha256": "5563e189d187aa8626688c9b5d81af3eb93b7e3cf8b78a961c2506cb1ae57f16"
+      },
+      "z.tif": {
+        "bytes": 984252,
+        "sha256": "7cb742a28a818014d7a8de2c61b080f946996986973bfd3f4ad8aa4244941dfc"
+      }
+    }
+  },
+  {
+    "id": "real-29220926-2.4um",
+    "segment": "20230929220926",
+    "resolution": "2.4um",
+    "error": 1.0,
+    "grid": [
+      3790,
+      1604
+    ],
+    "url": "https://vesuvius-challenge-open-data.s3.amazonaws.com/PHercParis4/segments/20230929220926/mesh/20230929220926-on-20260411134726-2.4um.tifxyz/",
+    "files": {
+      "meta.json": {
+        "bytes": 410,
+        "sha256": "5af018c7da1ce401d26012fa97327c24394e32197230ffada03d5eb8fa4cbdeb"
+      },
+      "x.tif": {
+        "bytes": 24316774,
+        "sha256": "d3d8a0c9bd01f053e0811353368c24b9bcea622c5bd7f3930d77fee7dd417bb0"
+      },
+      "y.tif": {
+        "bytes": 24316774,
+        "sha256": "acb72c471efc7c66fd6709e2d121ac7776ac6e8b6adb2ad2326a4429a8db59b6"
+      },
+      "z.tif": {
+        "bytes": 24316774,
+        "sha256": "bfd68e771edd4660728ea6323d060a57efb1c4ca0254e5efa71b7ebcc872fcc8"
+      }
+    }
+  },
+  {
+    "id": "real-29220926-7.91um",
+    "segment": "20230929220926",
+    "resolution": "7.91um",
+    "error": 0.25,
+    "grid": [
+      1164,
+      492
+    ],
+    "url": "https://vesuvius-challenge-open-data.s3.amazonaws.com/PHercParis4/segments/20230929220926/mesh/20230929220926-on-20230205180739-7.91um.tifxyz/",
+    "files": {
+      "meta.json": {
+        "bytes": 285,
+        "sha256": "078057f30f7235427fae72cc1a81550da6a7a218b2dc66d0004c53376d7f6c7e"
+      },
+      "x.tif": {
+        "bytes": 1482994,
+        "sha256": "1f4ed880074451eb9c144d15e8c12674645067f2f1810a4f49f14fea87445d41"
+      },
+      "y.tif": {
+        "bytes": 1472982,
+        "sha256": "f742cce51088a1f59d40d55032e00b89355c166715133dabffe359aba3a4bff7"
+      },
+      "z.tif": {
+        "bytes": 1233446,
+        "sha256": "fae72678471185658a69d63772a4403192fab2fe668920dec41d1f7e614bba14"
+      }
+    }
+  },
+  {
+    "id": "release-corpus/20231005123336-7.91um",
+    "segment": "20231005123336",
+    "resolution": "7.91um",
+    "error": 0.25,
+    "grid": [
+      1494,
+      535
+    ],
+    "url": "https://vesuvius-challenge-open-data.s3.amazonaws.com/PHercParis4/segments/20231005123336/mesh/20231005123336-on-20230205180739-7.91um.tifxyz/",
+    "files": {
+      "meta.json": {
+        "bytes": 285,
+        "sha256": "a79caeb39b1711f47dea39e2b0eb2cfeb97ffde30243a3cbccd15c0a135c115b"
+      },
+      "x.tif": {
+        "bytes": 2085860,
+        "sha256": "d3e8b99d335f5eed1116e33124a35437deb32e79e3ffc3f3795c8c81af96a612"
+      },
+      "y.tif": {
+        "bytes": 2083462,
+        "sha256": "3f5a6d3d767580d8855a7b53f0b50089e2e0fc2af3b64d45b10c1c3db606b489"
+      },
+      "z.tif": {
+        "bytes": 1742176,
+        "sha256": "fd40c7fdf7149e7cea71fcc5577b513ce89e543ba8afed206f9048f9dd03b6e7"
+      }
+    }
+  },
+  {
+    "id": "release-corpus/20231007101619-7.91um",
+    "segment": "20231007101619",
+    "resolution": "7.91um",
+    "error": 0.25,
+    "grid": [
+      1661,
+      798
+    ],
+    "url": "https://vesuvius-challenge-open-data.s3.amazonaws.com/PHercParis4/segments/20231007101619/mesh/20231007101619-on-20230205180739-7.91um.tifxyz/",
+    "files": {
+      "meta.json": {
+        "bytes": 292,
+        "sha256": "093b6597b84df8baf92c98e82a4b61cf66a315bdb6428bfc30ca724f9af4eff8"
+      },
+      "x.tif": {
+        "bytes": 3381580,
+        "sha256": "9696d0abb7b8447aa62df4ad7e3cd89ab0400b3350279d9a373fedc509a441a4"
+      },
+      "y.tif": {
+        "bytes": 3475406,
+        "sha256": "129c9c26546dea9c8f74618d655b0d56d5a1fd76d8ee1404f81f2fb776724fa6"
+      },
+      "z.tif": {
+        "bytes": 2962250,
+        "sha256": "389be1a66af464bc4177adc64d2fca64004da7aa5988869133dc3e8c1144d854"
+      }
+    }
+  },
+  {
+    "id": "release-corpus/20231012184424-7.91um",
+    "segment": "20231012184424",
+    "resolution": "7.91um",
+    "error": 0.25,
+    "grid": [
+      1163,
+      779
+    ],
+    "url": "https://vesuvius-challenge-open-data.s3.amazonaws.com/PHercParis4/segments/20231012184424/mesh/20231012184424-on-20230205180739-7.91um.tifxyz/",
+    "files": {
+      "meta.json": {
+        "bytes": 289,
+        "sha256": "7a701e34057fc64e0e79f76bd65def73267f6b6d52ea576fa124916d59cbfb78"
+      },
+      "x.tif": {
+        "bytes": 2369870,
+        "sha256": "f5d9dfb965f07a578c7bba72061c8fdb2df1e74230b8fd87f433944dd1674494"
+      },
+      "y.tif": {
+        "bytes": 2429212,
+        "sha256": "01a649dc0ff1582d32a281b6992d4a4dc49a4789d4a06385937fcf60cd5c6e38"
+      },
+      "z.tif": {
+        "bytes": 2063500,
+        "sha256": "4514191e496fab5869ea49a5af51d3b926d6897d2cc0bbecea8c4cabfd51e08c"
+      }
+    }
+  }
+]

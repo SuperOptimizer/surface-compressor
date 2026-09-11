@@ -1,0 +1,104 @@
+name: Release gates
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      fuzz_seconds:
+        description: Decoder fuzz duration
+        type: choice
+        default: '600'
+        options: ['120', '600', '3600']
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - {id: mac-arm-clang, os: macos-15, cc: clang, cxx: clang++, arch: arm64}
+          - {id: linux-gcc, os: ubuntu-24.04, cc: gcc, cxx: g++, arch: x86_64}
+          - {id: linux-clang, os: ubuntu-24.04, cc: clang, cxx: clang++, arch: x86_64}
+        math: ['ON', 'OFF']
+    runs-on: ${{ matrix.target.os }}
+    env:
+      CC: ${{ matrix.target.cc }}
+      CXX: ${{ matrix.target.cxx }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Dependencies
+        shell: bash
+        run: |
+          test "$(uname -m)" = "${{ matrix.target.arch }}"
+          if [ "$RUNNER_OS" = macOS ]; then brew install libtiff pkgconf; else sudo apt-get update && sudo apt-get install -y libtiff-dev pkg-config; fi
+          python -m pip install numpy tifffile imagecodecs
+      - name: Build and test
+        run: |
+          cmake -S . -B build/ci -DCMAKE_BUILD_TYPE=Release -DSFC_FAST_MATH=${{ matrix.math }} -DPython3_EXECUTABLE="$(command -v python)"
+          cmake --build build/ci -j2
+          ctest --test-dir build/ci --output-on-failure
+      - name: Installed packages
+        run: python tests/test_install.py
+      - name: Clean source archive
+        if: matrix.target.id == 'linux-clang' && matrix.math == 'ON'
+        run: python tests/test_archive.py
+      - name: Generate exchange containers
+        run: |
+          mkdir exchange
+          build/ci/test_compat write exchange/scalar.sfc scalar
+          build/ci/test_compat write exchange/xyz.sfc xyz
+          build/ci/test_compat write exchange/exact.sfc exact
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: fixtures-${{ matrix.target.id }}-${{ matrix.math }}
+          path: exchange/*.sfc
+          if-no-files-found: error
+  exchange:
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - {os: macos-15, cc: clang}
+          - {os: ubuntu-24.04, cc: gcc}
+          - {os: ubuntu-24.04, cc: clang}
+        math: ['ON', 'OFF']
+    runs-on: ${{ matrix.target.os }}
+    env:
+      CC: ${{ matrix.target.cc }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          pattern: fixtures-*
+          path: exchange
+      - name: Decode every other build's containers
+        shell: bash
+        run: |
+          cmake -S . -B build/exchange -DCMAKE_BUILD_TYPE=Release -DSFC_TOOLS=OFF -DSFC_FAST_MATH=${{ matrix.math }}
+          cmake --build build/exchange -j2 --target test_compat
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          files=list(Path('exchange').glob('*/*.sfc'))
+          assert len(files)==18, files
+          for path in files:
+              subprocess.run(['build/exchange/test_compat','read',str(path)],check=True)
+          PY
+  sanitize:
+    runs-on: ubuntu-24.04
+    env:
+      CC: clang
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Sanitizers and fuzz smoke
+        run: |
+          cmake -S . -B build/sanitize -DCMAKE_BUILD_TYPE=Debug -DSFC_TOOLS=OFF -DSFC_SANITIZE=ON -DSFC_FUZZ=ON
+          cmake --build build/sanitize -j2
+          ctest --test-dir build/sanitize --output-on-failure
+          python3 tests/seed_fuzz.py build/corpus
+          build/sanitize/fuzz_decode build/corpus -max_total_time=${{ inputs.fuzz_seconds || '120' }} -max_len=1048576 -timeout=10 -rss_limit_mb=512
